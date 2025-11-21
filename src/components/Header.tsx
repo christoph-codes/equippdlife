@@ -3,16 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaX, FaXmark } from "react-icons/fa6";
-
-const navLinks = [
-	{ href: "/", label: "Home" },
-	{ href: "/devotions", label: "Devotions", visible: true },
-	{ href: "/store", label: "Store", visible: false },
-	{ href: "/music", label: "Music", visible: false },
-	{ href: "/about", label: "About", visible: true },
-	{ href: "/contact", label: "Contact", visible: true },
-];
+import { FaXmark } from "react-icons/fa6";
+import { NavLink, navLinks } from "@/lib/navLinks";
 
 export function Header() {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -47,8 +39,8 @@ export function Header() {
 				/>
 			</Link>
 			<nav className="hidden sm:flex gap-6">
-				{navLinks
-					.filter((link) => link.visible)
+				{Object.values(navLinks)
+					.filter((link): link is NavLink => (link as NavLink).visible === true)
 					.map((link) => (
 						<Link
 							key={link.href}
@@ -106,8 +98,8 @@ export function Header() {
 				</div>
 				<div className="flex flex-col justify-between flex-1 min-h-0">
 					<div className="">
-						{navLinks
-							.filter((link) => link.visible)
+						{Object.values(navLinks)
+							.filter((link): link is NavLink => link.visible === true)
 							.map((link) => (
 								<Link
 									key={link.href}

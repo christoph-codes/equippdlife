@@ -1,4 +1,5 @@
 import { Button } from "@/components/Button";
+import { navLinks } from "@/lib/navLinks";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -43,8 +44,8 @@ export default function Home() {
 						className="animate-fade max-w-full"
 						src="/equippd_logo_desert.svg"
 						alt="Equippd logo"
-						width={400}
-						height={60}
+						width={300}
+						height={40}
 						priority
 					/>
 					<h1 className="sr-only">Equippd</h1>
@@ -53,17 +54,17 @@ export default function Home() {
 						body under Jesus.
 					</p>
 					<div className="flex divide-x">
-						<Button className="py-1 px-10" href="/devotionals">
-							Devotions
+						<Button className="py-1 px-10" href={navLinks.devotions.href}>
+							{navLinks.devotions.label}
 						</Button>
-						<Button className="py-1 px-10" href="/study">
-							Study
+						<Button className="py-1 px-10" href={navLinks.study.href}>
+							{navLinks.study.label}
 						</Button>
-						<Button className="py-1 px-10" href="/store">
-							Shop
+						<Button className="py-1 px-10" href={navLinks.store.href}>
+							{navLinks.store.label}
 						</Button>
-						<Button className="py-1 px-10" href="/music">
-							Music
+						<Button className="py-1 px-10" href={navLinks.music.href}>
+							{navLinks.music.label}
 						</Button>
 					</div>
 				</div>
