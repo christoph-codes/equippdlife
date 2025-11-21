@@ -55,11 +55,14 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
 	const contentHtml = processed.toString();
 
+	const excerpt = // snippet of first 160 chars without markdown
+		processed.toString().slice(0, 160).trim();
+
 	return {
 		title: (data.title as string) ?? slug,
 		slug: (data.slug as string) ?? slug,
 		date: (data.date as string) ?? "",
-		excerpt: (data.excerpt as string) ?? "",
+		excerpt: excerpt ?? "",
 		contentHtml,
 	};
 }
