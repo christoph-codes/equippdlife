@@ -40,7 +40,7 @@ export default function Home() {
 			<main className="flex min-h-screen w-full flex-col items-center justify-center ">
 				<div className="flex flex-col justify-center text-center items-center gap-12 animate-fade-in">
 					<Image
-						className="animate-fade"
+						className="animate-fade max-w-full"
 						src="/equippd_logo_desert.svg"
 						alt="Equippd logo"
 						width={400}

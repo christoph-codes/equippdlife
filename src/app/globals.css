@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-	--background: #ffffff;
-	--foreground: #302a24;
+	--background: #302a24;
+	--foreground: #ffffff;
 }
 
 @theme inline {
@@ -10,23 +10,16 @@
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
+	--color-primary: var(--background);
 
-	--animate-fade: fade 1s ease-in-out;
-	@keyframes fade {
-		0%,
-		100% {
+	--animate-fade-in: fade-in 3s ease-in-out;
+	@keyframes fade-in {
+		0% {
 			opacity: 0;
 		}
-		50% {
+		100% {
 			opacity: 1;
 		}
-	}
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #302a24;
-		--foreground: #ffffff;
 	}
 }
 
