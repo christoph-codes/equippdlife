@@ -22,7 +22,7 @@ export default async function DevotionPage({ params }: Props) {
 	}
 
 	return (
-		<main className="max-w-3xl mx-auto py-12 px-4">
+		<main>
 			<header className="mb-8">
 				<h1 className="text-3xl font-bold mb-2">{post.title}</h1>
 				{post.date && (

@@ -8,7 +8,7 @@ export default function DevotionsPage() {
 	}
 	// Fallback UI if no posts exist
 	return (
-		<main className="py-12 px-4 space-y-8">
+		<main className="py-8 px-4 space-y-8">
 			<header>
 				<h1 className="text-3xl font-bold">Devotions</h1>
 				<p className="text-sm text-gray-500">
