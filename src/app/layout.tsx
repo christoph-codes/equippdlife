@@ -28,7 +28,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${rajdhaniSans.variable} ${rajdhaniMono.variable} antialiased`}
+				className={`${rajdhaniSans.variable} ${rajdhaniMono.variable} antialiased overflow-x-hidden`}
 			>
 				{children}
 			</body>

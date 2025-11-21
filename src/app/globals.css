@@ -37,7 +37,7 @@ h6 {
 html,
 body {
 	min-height: 100%;
-	overflow-x: hidden;
+	overflow-x: hidden !important;
 }
 
 body {

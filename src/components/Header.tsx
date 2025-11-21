@@ -19,24 +19,21 @@ export function Header() {
 
 	useEffect(() => {
 		if (isMobileMenuOpen) {
-			// Prevent background scroll and horizontal scroll
-			document.body.style.overflow = "hidden";
+			// Prevent background scroll
+			document.body.style.overflowY = "hidden";
 			document.body.style.position = "fixed";
 			document.body.style.width = "100%";
-			document.documentElement.style.overflowX = "hidden";
 		} else {
 			// Restore scroll
-			document.body.style.overflow = "auto";
+			document.body.style.overflowY = "auto";
 			document.body.style.position = "";
 			document.body.style.width = "";
-			document.documentElement.style.overflowX = "";
 		}
 		// Clean up on unmount
 		return () => {
-			document.body.style.overflow = "auto";
+			document.body.style.overflowY = "auto";
 			document.body.style.position = "";
 			document.body.style.width = "";
-			document.documentElement.style.overflowX = "";
 		};
 	}, [isMobileMenuOpen]);
 
@@ -87,7 +84,7 @@ export function Header() {
 			</nav>
 			{/* Mobile menu - animated slide-in sidebar */}
 			<aside
-				className={`absolute top-0 right-0 bottom-0 max-w-[80vw] w-full sm:w-4/5 h-screen border-l bg-primary shadow-md flex flex-col transition-all duration-400 transform z-50 ${
+				className={`absolute top-0 right-0 bottom-0 w-4/5 h-screen border-l bg-primary shadow-md flex flex-col transition-all duration-400 transform z-50 ${
 					isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
 				}`}
 				style={{ pointerEvents: isMobileMenuOpen ? "auto" : "none" }}
