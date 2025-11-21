@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import ShareButton from "./ShareButton";
 
 type Props = {
 	// Next 16: params is a Promise
@@ -51,20 +52,14 @@ export default async function DevotionPage({ params }: Props) {
 	}
 
 	return (
-		<main>
-			<header className="mb-8">
-				<h1 className="text-3xl font-bold mb-2">{post.title}</h1>
-				{post.date && (
-					<p className="text-xs text-gray-400">
-						{new Date(post.date).toLocaleDateString()}
-					</p>
-				)}
-			</header>
-
+		<div className="py-6">
 			<article
 				className="prose max-w-none"
 				dangerouslySetInnerHTML={{ __html: post.contentHtml }}
 			/>
-		</main>
+			<div className="mt-8 flex">
+				<ShareButton title={post.title ?? ""} excerpt={post.excerpt ?? ""} />
+			</div>
+		</div>
 	);
 }

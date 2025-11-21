@@ -46,3 +46,23 @@ body {
 	font-family: "Rajdhani", Arial, Helvetica, sans-serif;
 	font-weight: 400;
 }
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6,
+.prose p,
+.prose li {
+	@apply mb-4;
+}
+
+h1,
+.prose h1 {
+	@apply text-4xl;
+}
+h2,
+.prose h2 {
+	@apply text-2xl;
+}
