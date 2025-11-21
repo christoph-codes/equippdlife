@@ -53,17 +53,17 @@ export default function Home() {
 						A lifestyle brand equipping believers to grow, walk, and live as one
 						body under Jesus.
 					</p>
-					<div className="flex divide-x">
-						<Button className="py-1 px-10" href={navLinks.devotions.href}>
+					<div className="flex divide-x h-3">
+						<Button className="py-1 px-3" href={navLinks.devotions.href}>
 							{navLinks.devotions.label}
 						</Button>
-						<Button className="py-1 px-10" href={navLinks.study.href}>
+						<Button className="py-1 px-3" href={navLinks.study.href}>
 							{navLinks.study.label}
 						</Button>
-						<Button className="py-1 px-10" href={navLinks.store.href}>
+						<Button className="py-1 px-3" href={navLinks.store.href}>
 							{navLinks.store.label}
 						</Button>
-						<Button className="py-1 px-10" href={navLinks.music.href}>
+						<Button className="py-1 px-3" href={navLinks.music.href}>
 							{navLinks.music.label}
 						</Button>
 					</div>

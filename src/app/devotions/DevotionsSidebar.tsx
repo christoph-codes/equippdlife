@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { PostMeta } from "@/lib/posts";
+import { getDevotionLabel } from "@/lib/helpers";
 
 export default function DevotionsSidebar({ posts }: { posts: PostMeta[] }) {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -37,7 +38,7 @@ export default function DevotionsSidebar({ posts }: { posts: PostMeta[] }) {
 					</option>
 					{posts.map((post) => (
 						<option key={post.slug} value={post.slug}>
-							{post.title}
+							{getDevotionLabel(post.date)}
 						</option>
 					))}
 				</select>
@@ -81,13 +82,9 @@ export default function DevotionsSidebar({ posts }: { posts: PostMeta[] }) {
 									}`}
 								>
 									<h2 className="text-lg md:text-xl font-semibold truncate">
-										{post.title}
+										{getDevotionLabel(post.date)}
 									</h2>
-									{post.date && (
-										<p className="text-xs mt-1">
-											{new Date(post.date).toLocaleDateString()}
-										</p>
-									)}
+									<p className="text-xs mt-1">{post.title}</p>
 								</button>
 							);
 						})

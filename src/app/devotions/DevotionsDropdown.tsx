@@ -1,5 +1,6 @@
 "use client";
 
+import { getDevotionLabel } from "@/lib/helpers";
 import { PostMeta } from "@/lib/posts";
 
 export default function DevotionsDropdown({ posts }: { posts: PostMeta[] }) {
@@ -17,7 +18,7 @@ export default function DevotionsDropdown({ posts }: { posts: PostMeta[] }) {
 			</option>
 			{posts.map((post: PostMeta) => (
 				<option key={post.slug} value={post.slug}>
-					{post.title}
+					{getDevotionLabel(post.date)}
 				</option>
 			))}
 		</select>
