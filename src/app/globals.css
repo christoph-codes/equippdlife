@@ -3,6 +3,7 @@
 :root {
 	--background: #302a24;
 	--foreground: #ffffff;
+	overscroll-behavior: none;
 }
 
 @theme inline {
