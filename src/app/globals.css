@@ -3,6 +3,9 @@
 :root {
 	--background: #302a24;
 	--foreground: #ffffff;
+	--primary-dark: #1f1d1b;
+	--desert: #d8ba98;
+	--negative: #f25666;
 	overscroll-behavior: none;
 }
 
@@ -12,6 +15,9 @@
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
 	--color-primary: var(--background);
+	--color-primary-dark: var(--primary-dark);
+	--color-desert: var(--desert);
+	--color-negative: var(--negative);
 
 	--animate-fade-in: fade-in 3s ease-in-out;
 	@keyframes fade-in {
@@ -55,15 +61,26 @@ body {
 .prose h5,
 .prose h6,
 .prose p,
-.prose li {
+.prose li,
+p,
+li {
 	@apply mb-4;
+}
+
+li,
+.prose li {
+	@apply ml-6 list-disc;
 }
 
 h1,
 .prose h1 {
-	@apply text-4xl;
+	@apply text-5xl;
 }
 h2,
 .prose h2 {
+	@apply text-3xl;
+}
+h3,
+.prose h3 {
 	@apply text-2xl;
 }

@@ -57,14 +57,17 @@ export default function Home() {
 						<Button className="py-1 px-3" href={navLinks.devotions.href}>
 							{navLinks.devotions.label}
 						</Button>
-						<Button className="py-1 px-3" href={navLinks.study.href}>
+						{/* <Button className="py-1 px-3" href={navLinks.study.href}>
 							{navLinks.study.label}
-						</Button>
-						<Button className="py-1 px-3" href={navLinks.store.href}>
+						</Button> */}
+						{/* <Button className="py-1 px-3" href={navLinks.store.href}>
 							{navLinks.store.label}
-						</Button>
+						</Button> */}
 						<Button className="py-1 px-3" href={navLinks.music.href}>
 							{navLinks.music.label}
+						</Button>
+						<Button className="py-1 px-3" href={navLinks.about.href}>
+							{navLinks.about.label}
 						</Button>
 					</div>
 				</div>

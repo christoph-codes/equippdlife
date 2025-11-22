@@ -9,7 +9,12 @@ export const navLinks: Record<string, NavLink> = {
 	devotions: { href: "/devotions", label: "Devotions", visible: true },
 	store: { href: "/store", label: "Store", visible: false },
 	study: { href: "/study", label: "Study", visible: false },
-	music: { href: "/music", label: "Music", visible: false },
-	about: { href: "/about", label: "About", visible: true },
-	contact: { href: "/contact", label: "Contact", visible: true },
+	music: { href: "/pages/music", label: "Music", visible: true },
+	about: { href: "/pages/about", label: "About", visible: true },
+	requestPrayer: {
+		href: "/pages/resources/request-prayer",
+		label: "Request Prayer",
+		visible: true,
+	},
+	contact: { href: "/pages/contact", label: "Contact", visible: false },
 };

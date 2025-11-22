@@ -10,7 +10,7 @@ export const Button = forwardRef<
 	ButtonProps
 >(({ href, className, ...rest }, ref) => {
 	const buttonStyles =
-		"inline-flex items-center justify-center gap-2 whitespace-nowrap text-base py-2 font-bold uppercase text-center hover:bg-black/20 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
+		"inline-flex items-center text-desert cursor-pointer justify-center gap-2 whitespace-nowrap text-base py-2 px-4 font-bold uppercase text-center hover:bg-black/20 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
 	if (href) {
 		const { type, disabled, ...anchorProps } = rest;
 		return (
