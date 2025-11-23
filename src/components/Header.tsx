@@ -30,7 +30,7 @@ export function Header() {
 	}, [isMobileMenuOpen]);
 
 	return (
-		<header className="sticky top-0 z-50 bg-primary shadow flex items-center justify-between px-4 py-3 border-b border-white">
+		<header className="sticky top-0 z-50 bg-primary shadow flex items-center justify-between px-4 py-3 border-b border-primary-dark">
 			<Link href="/" className="flex items-center gap-2">
 				<img
 					src="/equippd_logo_desert.svg"
