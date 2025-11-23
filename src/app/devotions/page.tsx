@@ -44,26 +44,28 @@ export default function DevotionsPage() {
 				<p>Grow in truth. Stand firm in faith. Live equipped.</p>
 			</header>
 			<section className="flex flex-col pb-24 md:pb-0">
-				   {posts.length === 0 ? (
-					   <div className="p-4 text-center text-white/70">
-						   No devotions found.
-					   </div>
-				   ) : (
-					   posts.map((post: PostMeta, idx: number) => (
-						   <Link
-							   key={post.slug}
-							   href={`/devotions/${post.slug}`}
-							   className={`w-full text-center rounded-sm py-4 px-6 transition-colors cursor-pointer bg-transparent hover:bg-white/5 ${
-								   idx === 0 ? 'opacity-100' : 'opacity-60 hover:opacity-100 focus:opacity-100'
-							   }`}
-						   >
-							   <h2 className="text-lg md:text-xl font-semibold truncate">
-								   {getDevotionLabel(post.date)}
-							   </h2>
-							   <p className="text-xs mb-0!">{post.title}</p>
-						   </Link>
-					   ))
-				   )}
+				{posts.length === 0 ? (
+					<div className="p-4 text-center text-white/70">
+						No devotions found.
+					</div>
+				) : (
+					posts.map((post: PostMeta, idx: number) => (
+						<Link
+							key={post.slug}
+							href={`/devotions/${post.slug}`}
+							className={`w-full text-center rounded-sm py-4 px-6 transition-colors cursor-pointer bg-transparent hover:bg-white/5 ${
+								idx === 0
+									? "opacity-100"
+									: "opacity-60 hover:opacity-100 focus:opacity-100"
+							}`}
+						>
+							<h2 className="text-lg md:text-xl font-semibold truncate">
+								{getDevotionLabel(post.date)}
+							</h2>
+							<p className="text-xs mb-0!">{post.title}</p>
+						</Link>
+					))
+				)}
 			</section>
 		</div>
 	);
