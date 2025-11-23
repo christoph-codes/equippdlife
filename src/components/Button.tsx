@@ -14,7 +14,7 @@ export const Button = forwardRef<
 		"inline-flex items-center text-desert cursor-pointer justify-center gap-2 whitespace-nowrap text-base py-2 px-4 font-bold uppercase text-center  transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
 	const variantStyles =
 		variant === "primary"
-			? "bg-desert hover:bg-black/20 focus-visible:ring-desert"
+			? "bg-transparent hover:bg-black/20 focus-visible:ring-desert"
 			: "bg-white/10 text-desert hover:bg-white/20 focus-visible:ring-white";
 	const combinedStyles = `${buttonStyles} ${variantStyles}`;
 	if (href) {
