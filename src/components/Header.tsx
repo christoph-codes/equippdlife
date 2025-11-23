@@ -17,13 +17,13 @@ export function Header() {
 			document.body.style.width = "100%";
 		} else {
 			// Restore scroll
-			document.body.style.overflowY = "auto";
+			document.body.style.overflowY = "";
 			document.body.style.position = "";
 			document.body.style.width = "";
 		}
 		// Clean up on unmount
 		return () => {
-			document.body.style.overflowY = "auto";
+			document.body.style.overflowY = "";
 			document.body.style.position = "";
 			document.body.style.width = "";
 		};

@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
 import { getAllPosts } from "@/lib/posts";
-import { Button } from "@/components/Button";
 import { Metadata } from "next";
+import { getDevotionLabel } from "@/lib/helpers";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Devotions » Equippd",
@@ -36,26 +36,35 @@ export const metadata: Metadata = {
 
 export default function DevotionsPage() {
 	const posts = getAllPosts();
+
 	return (
-		<>
-			<header className="p-3 space-y-2">
+		<div className="flex flex-1 flex-col justify-center items-center max-w-3xl mx-auto pt-6 h-full overflow-y-auto">
+			<header className="p-3 space-y-2 text-center">
 				<h1 className="text-3xl">Devotions</h1>
-				<h2 className="text-lg">
-					Grow in truth. Stand firm in faith. Live equipped.
-				</h2>
-
-				<p>
-					At Equippd, our heart is to help believers grow together in unity
-					through Scripture-centered devotionals that strengthen your walk with
-					Christ. Each devotion is written to encourage, challenge, and equip
-					you with biblical truth for everyday life.
-				</p>
-
-				<p>Stay grounded. Stay encouraged. Stay unified in Christ.</p>
-				<Button href={`/devotions/${posts[0].slug}`}>
-					Read Today's Devotion
-				</Button>
+				<p>Grow in truth. Stand firm in faith. Live equipped.</p>
 			</header>
-		</>
+			<section className="flex flex-col pb-24 md:pb-0">
+				{posts.length === 0 ? (
+					<div className="p-4 text-center text-white/70">
+						No devotions found.
+					</div>
+				) : (
+					posts.map((post) => {
+						return (
+							<Link
+								key={post.slug}
+								href={`/devotions/${post.slug}`}
+								className={`w-full text-center rounded-sm py-4 px-6 transition-colors cursor-pointer bg-transparent hover:bg-white/5`}
+							>
+								<h2 className="text-lg md:text-xl font-semibold truncate">
+									{getDevotionLabel(post.date)}
+								</h2>
+								<p className="text-xs mb-0!">{post.title}</p>
+							</Link>
+						);
+					})
+				)}
+			</section>
+		</div>
 	);
 }

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import ShareButton from "./ShareButton";
+import DevotionHeader from "./DevotionHeader";
 
 type Props = {
 	// Next 16: params is a Promise
@@ -52,14 +53,17 @@ export default async function DevotionPage({ params }: Props) {
 	}
 
 	return (
-		<div className="py-6">
-			<article
-				className="prose max-w-none"
-				dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-			/>
-			<div className="mt-8 flex">
-				<ShareButton title={post.title ?? ""} excerpt={post.excerpt ?? ""} />
+		<>
+			<DevotionHeader posts={getAllPosts()} />
+			<div className="p-6 mb-12 flex justify-center items-center h-full">
+				<article
+					className="prose max-w-none"
+					dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+				/>
+				<div className="mt-8 flex">
+					<ShareButton title={post.title ?? ""} excerpt={post.excerpt ?? ""} />
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
