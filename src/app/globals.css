@@ -1,3 +1,24 @@
+.devotion-faded {
+	opacity: 0.6;
+	transition: opacity 0.2s;
+}
+.devotion-faded:hover, .devotion-faded:focus {
+	opacity: 1;
+}
+@keyframes slidenfade {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+.animate-slidenfade {
+	opacity: 0;
+	animation: slidenfade 0.7s ease forwards;
+}
 @import "tailwindcss";
 
 :root {

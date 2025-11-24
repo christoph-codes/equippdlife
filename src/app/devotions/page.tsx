@@ -53,11 +53,10 @@ export default function DevotionsPage() {
 						<Link
 							key={post.slug}
 							href={`/devotions/${post.slug}`}
-							className={`w-full text-center rounded-sm py-4 px-6 transition-colors cursor-pointer bg-transparent hover:bg-white/5 ${
-								idx === 0
-									? "opacity-100"
-									: "opacity-60 hover:opacity-100 focus:opacity-100"
+							className={`w-full text-center rounded-sm py-4 px-6 transition-all cursor-pointer bg-transparent hover:bg-white/5 animate-slidenfade${
+								idx === 0 ? "" : " devotion-faded"
 							}`}
+							style={{ animationDelay: `${idx * 0.3}s` }}
 						>
 							<h2 className="text-lg md:text-xl font-semibold truncate">
 								{getDevotionLabel(post.date)}
