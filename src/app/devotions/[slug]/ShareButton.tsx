@@ -25,7 +25,7 @@ const ShareButton = ({
 	};
 	return (
 		<Button
-			className="w-full bg-primary border-t border-primary-dark py-4 fixed bottom-0 left-0 right-0"
+			className="w-full bg-primary! hover:bg-primary-dark! transition-colors border-t border-primary-dark py-4 fixed bottom-0 left-0 right-0"
 			onClick={share}
 		>
 			<FaShare />

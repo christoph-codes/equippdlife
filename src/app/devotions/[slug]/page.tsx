@@ -55,7 +55,7 @@ export default async function DevotionPage({ params }: Props) {
 	return (
 		<>
 			<DevotionHeader posts={getAllPosts()} />
-			<div className="p-6 mb-12 flex justify-center items-center h-full">
+			<div className="p-6 mb-12 flex justify-center items-center h-full max-w-3xl mx-auto">
 				<article
 					className="prose max-w-none"
 					dangerouslySetInnerHTML={{ __html: post.contentHtml }}
