@@ -2,7 +2,8 @@
 	opacity: 0.6;
 	transition: opacity 0.2s;
 }
-.devotion-faded:hover, .devotion-faded:focus {
+.devotion-faded:hover,
+.devotion-faded:focus {
 	opacity: 1;
 }
 @keyframes slidenfade {
