@@ -27,6 +27,7 @@
 	--foreground: #ffffff;
 	--primary-dark: #1f1d1b;
 	--desert: #d8ba98;
+	--desert-dark: #645543;
 	--negative: #f25666;
 	overscroll-behavior: none;
 }
@@ -39,6 +40,7 @@
 	--color-primary: var(--background);
 	--color-primary-dark: var(--primary-dark);
 	--color-desert: var(--desert);
+	--color-desert-dark: var(--desert-dark);
 	--color-negative: var(--negative);
 
 	--animate-fade-in: fade-in 3s ease-in-out;
