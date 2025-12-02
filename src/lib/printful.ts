@@ -180,6 +180,18 @@ export async function createPrintfulOrder(orderData: {
 }): Promise<{ printfulOrderId: number; status: string }> {
   const client = getPrintfulClient();
 
+  // Validate and parse variant IDs
+  const parsedItems = orderData.items.map((item) => {
+    const variantId = parseInt(item.printfulVariantId, 10);
+    if (isNaN(variantId)) {
+      throw new Error(`Invalid Printful variant ID: ${item.printfulVariantId}`);
+    }
+    return {
+      variant_id: variantId,
+      quantity: item.quantity,
+    };
+  });
+
   const payload: PrintfulOrderPayload = {
     recipient: {
       name: orderData.shippingName,
@@ -190,10 +202,7 @@ export async function createPrintfulOrder(orderData: {
       zip: orderData.shippingZip,
       email: orderData.email,
     },
-    items: orderData.items.map((item) => ({
-      variant_id: parseInt(item.printfulVariantId, 10),
-      quantity: item.quantity,
-    })),
+    items: parsedItems,
     confirm: true, // Auto-confirm the order for fulfillment
   };
 

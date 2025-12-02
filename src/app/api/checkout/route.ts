@@ -98,7 +98,15 @@ export async function POST(request: NextRequest) {
     });
 
     // Create Stripe Checkout Session
-    const siteUrl = process.env.NEXT_PUBLIC_SITEURL || "http://localhost:3000";
+    const siteUrl = process.env.NEXT_PUBLIC_SITEURL;
+    if (!siteUrl && process.env.NODE_ENV === "production") {
+      console.error("NEXT_PUBLIC_SITEURL is not configured");
+      return NextResponse.json<CheckoutResponse>(
+        { success: false, error: "Server configuration error" },
+        { status: 500 }
+      );
+    }
+    const baseUrl = siteUrl || "http://localhost:3000";
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -114,8 +122,8 @@ export async function POST(request: NextRequest) {
         },
         quantity: cartItem.quantity,
       })),
-      success_url: `${siteUrl}/store/order/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/checkout?canceled=1`,
+      success_url: `${baseUrl}/store/order/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/checkout?canceled=1`,
       metadata: {
         orderId: order.id,
       },

@@ -7,7 +7,7 @@ import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { useCartStore } from "@/store/cart";
 import Image from "next/image";
-import type { CartItem, CheckoutResponse } from "@/types/store";
+import type { CartItem, CheckoutResponse, ShippingInfo } from "@/types/store";
 
 // Hook to check if we're on the client
 function useHydrated() {
