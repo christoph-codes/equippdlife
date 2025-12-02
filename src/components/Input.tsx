@@ -1,58 +1,66 @@
-import { Dispatch, InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, ChangeEvent } from "react";
 
-export type InputProps = {
-	placeholder?: string;
-	name: string;
-	value: string;
+type BaseInputProps = {
 	label: string;
-	onChange: Dispatch<React.SetStateAction<string>>;
+	name: string;
 	type?: InputHTMLAttributes<HTMLInputElement>["type"] | "textarea";
 	rows?: number;
+	className?: string;
+	value?: string;
+	placeholder?: string;
+	required?: boolean;
+	onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const Input = ({
+export type InputProps = BaseInputProps;
+
+export const Input = ({
 	name,
-	value,
-	onChange,
 	label,
-	placeholder,
+	className,
+	onChange,
 	type,
 	rows,
-	...rest
+	value,
+	placeholder,
+	required,
 }: InputProps) => {
-	const isTextarea = type === "textarea";
-	if (isTextarea) {
+	const baseInputStyles = `bg-white/10 text-white border border-white/20 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-desert focus:border-desert w-full placeholder:text-white/50 ${className ?? ""}`;
+
+	if (type === "textarea") {
 		return (
 			<fieldset className="flex flex-col">
-				<label htmlFor={name} className="font-bold">
+				<label htmlFor={name} className="font-bold text-white mb-2">
 					{label}
 				</label>
 				<textarea
-					{...rest}
 					id={name}
 					name={name}
-					className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary w-full"
-					placeholder={placeholder}
+					className={baseInputStyles}
+					onChange={onChange}
 					value={value}
-					onChange={(e) => onChange(e.target.value)}
 					rows={rows}
+					placeholder={placeholder}
+					required={required}
 				/>
 			</fieldset>
 		);
 	}
+
 	return (
 		<fieldset className="flex flex-col">
-			<label htmlFor={name} className="font-bold">
+			<label htmlFor={name} className="font-bold text-white mb-2">
 				{label}
 			</label>
 			<input
-				{...rest}
 				id={name}
 				name={name}
-				className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary w-full"
-				placeholder={placeholder}
+				type={type}
+				className={baseInputStyles}
+				onChange={onChange}
 				value={value}
-				onChange={(e) => onChange(e.target.value)}
+				placeholder={placeholder}
+				required={required}
 			/>
 		</fieldset>
 	);

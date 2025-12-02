@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { NavLink, navLinks } from "@/lib/navLinks";
+import { CartIcon } from "@/components/store/CartIcon";
 
 export function Header() {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,13 +33,15 @@ export function Header() {
 	return (
 		<header className="sticky top-0 z-50 bg-primary shadow flex items-center justify-between px-4 py-3 border-b border-primary-dark">
 			<Link href="/" className="flex items-center gap-2">
-				<img
+				<Image
 					src="/equippd_logo_desert.svg"
 					alt="Equippd Logo"
 					className="w-16"
+					width={64}
+					height={20}
 				/>
 			</Link>
-			<nav className="hidden sm:flex gap-6">
+			<nav className="hidden sm:flex items-center gap-6">
 				{Object.values(navLinks)
 					.filter((link): link is NavLink => (link as NavLink).visible === true)
 					.map((link) => (
@@ -50,8 +53,10 @@ export function Header() {
 							{link.label}
 						</Link>
 					))}
+				<CartIcon />
 			</nav>
-			<nav className="sm:hidden">
+			<nav className="sm:hidden flex items-center gap-2">
+				<CartIcon />
 				{/* Hamburger menu for mobile */}
 				<button
 					className="p-2 rounded focus:outline-none focus:ring"

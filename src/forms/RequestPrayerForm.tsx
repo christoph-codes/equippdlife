@@ -2,7 +2,7 @@
 import { Button } from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
 import Input from "@/components/Input";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 
 const RequestPrayerForm = () => {
 	const [name, setName] = useState("");
@@ -42,6 +42,10 @@ const RequestPrayerForm = () => {
 		setIsSubmitted(true);
 		clearForm();
 	};
+
+	const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>) => 
+		(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setter(e.target.value);
+
 	return (
 		<form className="space-y-4" onSubmit={handleSubmit}>
 			<Input
@@ -49,21 +53,21 @@ const RequestPrayerForm = () => {
 				label="Name"
 				placeholder="Your name"
 				value={name}
-				onChange={setName}
+				onChange={handleInputChange(setName)}
 			/>
 			<Input
 				name="email"
 				label="Email"
 				placeholder="Your email"
 				value={email}
-				onChange={setEmail}
+				onChange={handleInputChange(setEmail)}
 			/>
 			<Input
 				name="prayerRequest"
 				label="Prayer Request"
 				placeholder="Your prayer request"
 				value={prayerRequest}
-				onChange={setPrayerRequest}
+				onChange={handleInputChange(setPrayerRequest)}
 				type="textarea"
 				rows={5}
 			/>
