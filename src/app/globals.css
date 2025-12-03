@@ -1,3 +1,6 @@
+/* Import Rajdhani font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap");
+
 .devotion-faded {
 	opacity: 0.6;
 	transition: opacity 0.2s;

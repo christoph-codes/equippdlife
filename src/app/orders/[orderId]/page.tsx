@@ -4,8 +4,10 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
-import { ORDER_STATUS_LABELS } from "@/types/store";
-import type { OrderStatus } from "@/generated/prisma";
+import { ORDER_STATUS_LABELS, OrderStatus } from "@/types/store";
+
+// Force dynamic rendering (no prerendering at build time)
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ orderId: string }>;
@@ -52,7 +54,7 @@ export default async function OrderStatusPage({ params }: Props) {
     notFound();
   }
 
-  const currentStepIndex = TIMELINE_STEPS.indexOf(order.status);
+  const currentStepIndex = TIMELINE_STEPS.indexOf(order.status as OrderStatus);
   const isCanceled = order.status === "canceled";
 
   return (

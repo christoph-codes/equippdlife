@@ -5,6 +5,9 @@ import { Header } from "@/components/Header";
 import { ProductGallery } from "@/components/store/ProductGallery";
 import { ProductDetail } from "./ProductDetail";
 
+// Force dynamic rendering (no prerendering at build time)
+export const dynamic = "force-dynamic";
+
 type Props = {
   params: Promise<{ slug: string }>;
 };

@@ -3,6 +3,9 @@ import { prisma } from "@/lib/db";
 import { ProductCard } from "@/components/store/ProductCard";
 import { Header } from "@/components/Header";
 
+// Force dynamic rendering (no prerendering at build time)
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Store | Equippd",
   description: "Shop Equippd apparel - hoodies, tees, hats, and more. Faith-inspired lifestyle wear.",

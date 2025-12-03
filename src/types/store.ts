@@ -8,12 +8,20 @@ import type {
   ProductImage,
   Order,
   OrderItem,
-  OrderStatus,
-} from "@/generated/prisma";
+} from "@prisma/client";
 
 // Re-export Prisma types for convenience
 export type { Product, ProductVariant, ProductImage, Order, OrderItem };
-export { OrderStatus };
+
+// Define OrderStatus as a union type since SQLite doesn't support enums
+export type OrderStatus = 
+  | "pending_payment"
+  | "paid"
+  | "submitted_to_printful"
+  | "in_production"
+  | "shipped"
+  | "delivered"
+  | "canceled";
 
 // Extended types with relations
 export type ProductWithVariantsAndImages = Product & {

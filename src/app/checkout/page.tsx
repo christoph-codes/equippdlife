@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
@@ -18,17 +18,27 @@ function useHydrated() {
   );
 }
 
-export default function CheckoutPage() {
-  const mounted = useHydrated();
+// Component that uses useSearchParams
+function CanceledCheckoutBanner() {
   const searchParams = useSearchParams();
+  const wasCanceled = searchParams.get("canceled") === "1";
+  
+  if (!wasCanceled) return null;
+  
+  return (
+    <div className="bg-yellow-500/20 text-yellow-500 px-4 py-3 rounded-md mb-6">
+      Your checkout was canceled. You can try again below.
+    </div>
+  );
+}
+
+function CheckoutContent() {
+  const mounted = useHydrated();
   const items = useCartStore((state) => state.items);
   const getSubtotal = useCartStore((state) => state.getSubtotal);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Check for canceled checkout
-  const wasCanceled = searchParams.get("canceled") === "1";
 
   const [shipping, setShipping] = useState<ShippingInfo>({
     name: "",
@@ -40,7 +50,13 @@ export default function CheckoutPage() {
     country: "US",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setShipping((prev) => ({ ...prev, [name]: value }));
+    setError(null);
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setShipping((prev) => ({ ...prev, [name]: value }));
     setError(null);
@@ -148,11 +164,9 @@ export default function CheckoutPage() {
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-white mb-8">CHECKOUT</h1>
 
-        {wasCanceled && (
-          <div className="bg-yellow-500/20 text-yellow-500 px-4 py-3 rounded-md mb-6">
-            Your checkout was canceled. You can try again below.
-          </div>
-        )}
+        <Suspense fallback={null}>
+          <CanceledCheckoutBanner />
+        </Suspense>
 
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -218,7 +232,7 @@ export default function CheckoutPage() {
                     <select
                       name="country"
                       value={shipping.country}
-                      onChange={handleInputChange}
+                      onChange={handleSelectChange}
                       className="w-full px-4 py-2 bg-white/10 text-white rounded-md border border-white/20 focus:border-desert focus:ring-1 focus:ring-desert outline-none"
                     >
                       <option value="US">United States</option>
@@ -312,4 +326,8 @@ export default function CheckoutPage() {
       </main>
     </div>
   );
+}
+
+export default function CheckoutPage() {
+  return <CheckoutContent />;
 }

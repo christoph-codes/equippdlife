@@ -1,19 +1,7 @@
 import type { Metadata } from "next";
-import { Rajdhani } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
 
-const rajdhaniSans = Rajdhani({
-	variable: "--font-rajdhani-sans",
-	subsets: ["latin"],
-	weight: ["400", "700"],
-});
-
-const rajdhaniMono = Rajdhani({
-	variable: "--font-rajdhani-mono",
-	subsets: ["latin"],
-	weight: ["400", "700"],
-});
+// Note: Rajdhani font is defined in globals.css using @font-face or system fallbacks
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -27,9 +15,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${rajdhaniSans.variable} ${rajdhaniMono.variable} antialiased overflow-x-hidden`}
-			>
+			<body className="antialiased overflow-x-hidden">
 				{children}
 			</body>
 		</html>

@@ -4,8 +4,11 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
-import { ORDER_STATUS_LABELS } from "@/types/store";
+import { ORDER_STATUS_LABELS, OrderStatus } from "@/types/store";
 import { ClearCartOnSuccess } from "./ClearCartOnSuccess";
+
+// Force dynamic rendering (no prerendering at build time)
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Order Confirmed | Equippd Store",
@@ -83,7 +86,7 @@ export default async function OrderSuccessPage({ searchParams }: Props) {
               <div className="flex justify-between">
                 <span className="text-white/70">Status</span>
                 <span className="text-desert font-semibold">
-                  {ORDER_STATUS_LABELS[order.status]}
+                  {ORDER_STATUS_LABELS[order.status as OrderStatus]}
                 </span>
               </div>
 

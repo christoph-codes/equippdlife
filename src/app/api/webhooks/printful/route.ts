@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import type { PrintfulWebhookEvent } from "@/types/store";
-import type { OrderStatus } from "@/generated/prisma";
+import type { PrintfulWebhookEvent, OrderStatus } from "@/types/store";
 
 // Map Printful status to our internal status
 function mapPrintfulStatus(printfulStatus: string): OrderStatus | null {

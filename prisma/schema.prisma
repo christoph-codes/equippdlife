@@ -2,12 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model Product {
@@ -52,7 +52,7 @@ model Order {
   id                      String      @id @default(cuid())
   userId                  String? // Nullable for guest checkout
   email                   String
-  status                  OrderStatus @default(pending_payment)
+  status                  String      @default("pending_payment") // OrderStatus values
   stripeCheckoutSessionId String?
   stripePaymentIntentId   String?
   printfulOrderId         String?
@@ -76,15 +76,7 @@ model Order {
   items       OrderItem[]
 }
 
-enum OrderStatus {
-  pending_payment
-  paid
-  submitted_to_printful
-  in_production
-  shipped
-  delivered
-  canceled
-}
+// OrderStatus values: pending_payment, paid, submitted_to_printful, in_production, shipped, delivered, canceled
 
 model OrderItem {
   id                String          @id @default(cuid())
