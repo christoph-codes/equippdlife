@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export type Comment = {
 id: string;
@@ -14,22 +14,23 @@ postSlug: string;
 };
 
 const Comments = ({ studySlug, postSlug }: CommentsProps) => {
-const [comments, setComments] = useState<Comment[]>([]);
-const [newComment, setNewComment] = useState("");
-const [isSubmitting, setIsSubmitting] = useState(false);
-
-// Load comments from localStorage
-useEffect(() => {
+// Initialize comments from localStorage
+const [comments, setComments] = useState<Comment[]>(() => {
+if (typeof window === "undefined") return [];
 const storageKey = `study-comments-${studySlug}-${postSlug}`;
 const stored = localStorage.getItem(storageKey);
 if (stored) {
 try {
-setComments(JSON.parse(stored));
+return JSON.parse(stored);
 } catch (e) {
 console.error("Failed to parse comments", e);
+return [];
 }
 }
-}, [studySlug, postSlug]);
+return [];
+});
+const [newComment, setNewComment] = useState("");
+const [isSubmitting, setIsSubmitting] = useState(false);
 
 // Save comments to localStorage
 const saveComments = (updatedComments: Comment[]) => {
