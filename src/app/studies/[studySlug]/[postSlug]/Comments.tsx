@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/Button";
 import { Textarea } from "@/components/Textarea";
-import { Comment as CommentComponent, CommentData } from "@/components/Comment";
+import { Comment, CommentData } from "@/components/Comment";
 
 export type CommentsProps = {
 studySlug: string;
@@ -84,7 +84,7 @@ No comments yet. Be the first to share your thoughts!
 </p>
 ) : (
 comments.map((comment) => (
-<CommentComponent key={comment.id} comment={comment} />
+<Comment key={comment.id} data={comment} />
 ))
 )}
 </div>
