@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getAllStudies, getStudyBySlug, StudyPostMeta } from "@/lib/studies";
 import Link from "next/link";
-import { Button } from "@/components/Button";
 
 type Props = {
 params: Promise<{ studySlug: string }>;
@@ -49,11 +48,6 @@ notFound();
 
 return (
 <div className="flex flex-1 flex-col justify-center items-center max-w-3xl mx-auto pt-6 h-full overflow-y-auto">
-<div className="w-full mb-4 px-6">
-<Button variant="secondary" href="/studies">
-← Back to Studies
-</Button>
-</div>
 <header className="p-3 space-y-2 text-center">
 <h1 className="text-3xl">{study.title}</h1>
 <p className="text-white/70">{study.description}</p>
