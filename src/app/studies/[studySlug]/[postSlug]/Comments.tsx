@@ -23,7 +23,7 @@ if (stored) {
 try {
 return JSON.parse(stored);
 } catch (e) {
-console.error("Failed to parse comments", e);
+console.error(`Failed to parse comments for ${storageKey}`, e);
 return [];
 }
 }

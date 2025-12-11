@@ -133,7 +133,8 @@ export async function getStudyPost(
 	const processed = await remark().use(remarkGfm).use(html).process(content);
 	const contentHtml = processed.toString();
 
-	const excerpt = processed.toString().slice(0, 160).trim();
+	const excerpt =
+		(data.excerpt as string) ?? processed.toString().slice(0, 160).trim();
 
 	return {
 		title: (data.title as string) ?? postSlug,
