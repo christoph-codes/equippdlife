@@ -57,9 +57,9 @@ export default function Home() {
 						<Button className="py-1 px-3" href={navLinks.devotions.href}>
 							{navLinks.devotions.label}
 						</Button>
-						{/* <Button className="py-1 px-3" href={navLinks.study.href}>
-							{navLinks.study.label}
-						</Button> */}
+						<Button className="py-1 px-3" href={navLinks.studies.href}>
+							{navLinks.studies.label}
+						</Button>
 						{/* <Button className="py-1 px-3" href={navLinks.store.href}>
 							{navLinks.store.label}
 						</Button> */}
