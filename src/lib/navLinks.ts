@@ -7,6 +7,7 @@ export type NavLink = {
 export const navLinks: Record<string, NavLink> = {
 	home: { href: "/", label: "Home" },
 	devotions: { href: "/devotions", label: "Devotions", visible: true },
+	studies: { href: "/studies", label: "Studies", visible: true },
 	store: { href: "/store", label: "Store", visible: false },
 	study: { href: "/study", label: "Study", visible: false },
 	music: { href: "/pages/music", label: "Music", visible: true },
