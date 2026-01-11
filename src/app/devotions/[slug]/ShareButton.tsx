@@ -6,21 +6,25 @@ import { FaShare } from "react-icons/fa6";
 const ShareButton = ({
 	title,
 	excerpt,
+	lastParagraph,
 }: {
 	title: string;
 	excerpt: string;
+	lastParagraph?: string;
 }) => {
 	const share = async () => {
+		const url = typeof window !== "undefined" ? window.location.href : "";
+		// Use last paragraph if available, otherwise fall back to excerpt
+		const shareText = lastParagraph || excerpt;
+		const textWithUrl = `${shareText}\n\n${url}`;
+
 		if (navigator.share) {
 			await navigator.share({
 				title,
-				text: excerpt,
-				url: typeof window !== "undefined" ? window.location.href : "",
+				text: textWithUrl,
 			});
 		} else {
-			await navigator.clipboard.writeText(
-				typeof window !== "undefined" ? window.location.href : ""
-			);
+			await navigator.clipboard.writeText(textWithUrl);
 		}
 	};
 	return (
