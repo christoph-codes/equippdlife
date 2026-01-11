@@ -61,7 +61,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
 	// Extract last paragraph from HTML content
 	// Match the last <p>...</p> tag and extract its text content
-	const paragraphMatches = contentHtml.match(/<p>[\s\S]*?<\/p>/g);
+	const paragraphMatches = contentHtml.match(/<p[^>]*>[\s\S]*?<\/p>/g);
 	let lastParagraph = "";
 	if (paragraphMatches && paragraphMatches.length > 0) {
 		const lastPTag = paragraphMatches[paragraphMatches.length - 1];
@@ -69,9 +69,11 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 		lastParagraph = lastPTag
 			.replace(/<[^>]*>/g, "")
 			.replace(/&quot;/g, '"')
+			.replace(/&#39;/g, "'")
 			.replace(/&amp;/g, "&")
 			.replace(/&lt;/g, "<")
 			.replace(/&gt;/g, ">")
+			.replace(/&nbsp;/g, " ")
 			.trim();
 	}
 
