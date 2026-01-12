@@ -61,7 +61,11 @@ export default async function DevotionPage({ params }: Props) {
 					dangerouslySetInnerHTML={{ __html: post.contentHtml }}
 				/>
 				<div className="mt-8 flex">
-					<ShareButton title={post.title ?? ""} excerpt={post.excerpt ?? ""} />
+					<ShareButton
+						title={post.title ?? ""}
+						excerpt={post.excerpt ?? ""}
+						lastParagraph={post.lastParagraph}
+					/>
 				</div>
 			</div>
 		</>

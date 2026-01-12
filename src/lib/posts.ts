@@ -16,6 +16,7 @@ export type PostMeta = {
 
 export type Post = PostMeta & {
 	contentHtml: string;
+	lastParagraph?: string;
 };
 
 export function getPostSlugs(): string[] {
@@ -58,11 +59,30 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 	const excerpt = // snippet of first 160 chars without markdown
 		processed.toString().slice(0, 160).trim();
 
+	// Extract last paragraph from HTML content
+	// Match the last <p>...</p> tag and extract its text content
+	const paragraphMatches = contentHtml.match(/<p[^>]*>[\s\S]*?<\/p>/g);
+	let lastParagraph = "";
+	if (paragraphMatches && paragraphMatches.length > 0) {
+		const lastPTag = paragraphMatches[paragraphMatches.length - 1];
+		// Remove HTML tags and decode HTML entities
+		lastParagraph = lastPTag
+			.replace(/<[^>]*>/g, "")
+			.replace(/&quot;/g, '"')
+			.replace(/&#39;/g, "'")
+			.replace(/&amp;/g, "&")
+			.replace(/&lt;/g, "<")
+			.replace(/&gt;/g, ">")
+			.replace(/&nbsp;/g, " ")
+			.trim();
+	}
+
 	return {
 		title: (data.title as string) ?? slug,
 		slug: (data.slug as string) ?? slug,
 		date: (data.date as string) ?? "",
 		excerpt: excerpt ?? "",
 		contentHtml,
+		lastParagraph,
 	};
 }
