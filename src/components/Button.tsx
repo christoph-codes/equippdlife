@@ -1,40 +1,97 @@
-import Link from "next/link";
-import { ButtonHTMLAttributes, AnchorHTMLAttributes, forwardRef } from "react";
+import React from 'react';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
+import { colors, typography, spacing, borderRadius } from '../theme';
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-	href?: string;
-	variant?: "primary" | "secondary";
-} & AnchorHTMLAttributes<HTMLAnchorElement>;
+interface Props {
+  label: string;
+  onPress: () => void;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  loading?: boolean;
+  disabled?: boolean;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+  fullWidth?: boolean;
+}
 
-export const Button = forwardRef<
-	HTMLButtonElement | HTMLAnchorElement,
-	ButtonProps
->(({ href, className, variant = "primary", ...rest }, ref) => {
-	const buttonStyles =
-		"inline-flex items-center text-desert cursor-pointer justify-center gap-2 whitespace-nowrap text-base py-2 px-4 font-bold uppercase text-center  transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
-	const variantStyles =
-		variant === "primary"
-			? "bg-transparent hover:bg-black/20 focus-visible:ring-desert"
-			: "bg-white/10 text-desert hover:bg-white/20 focus-visible:ring-white";
-	const combinedStyles = `${buttonStyles} ${variantStyles}`;
-	if (href) {
-		const { type, disabled, ...anchorProps } = rest;
-		return (
-			<Link
-				className={`${combinedStyles} ${className ?? ""}`}
-				href={href}
-				ref={ref as React.Ref<HTMLAnchorElement>}
-				{...anchorProps}
-			/>
-		);
-	}
-	return (
-		<button
-			className={`${combinedStyles} ${className ?? ""}`}
-			ref={ref as React.Ref<HTMLButtonElement>}
-			{...rest}
-		/>
-	);
+export const Button: React.FC<Props> = ({
+  label,
+  onPress,
+  variant = 'primary',
+  loading = false,
+  disabled = false,
+  style,
+  textStyle,
+  fullWidth = false,
+}) => {
+  const isDisabled = disabled || loading;
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      disabled={isDisabled}
+      style={[
+        styles.base,
+        styles[variant],
+        fullWidth && styles.fullWidth,
+        isDisabled && styles.disabled,
+        style,
+      ]}
+      activeOpacity={0.8}
+    >
+      {loading ? (
+        <ActivityIndicator color={variant === 'primary' ? colors.black : colors.primary} size="small" />
+      ) : (
+        <Text style={[styles.label, styles[`${variant}Label` as 'primaryLabel' | 'secondaryLabel' | 'ghostLabel'], textStyle]}>{label}</Text>
+      )}
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  base: {
+    paddingVertical: spacing.sm + 4,
+    paddingHorizontal: spacing.lg,
+    borderRadius: borderRadius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 48,
+  },
+  fullWidth: {
+    width: '100%',
+  },
+  primary: {
+    backgroundColor: colors.primary,
+  },
+  secondary: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: colors.primary,
+  },
+  ghost: {
+    backgroundColor: 'transparent',
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  label: {
+    fontSize: typography.fontSize.base,
+    fontWeight: typography.fontWeight.semibold,
+    letterSpacing: 0.3,
+  },
+  primaryLabel: {
+    color: colors.black,
+  },
+  secondaryLabel: {
+    color: colors.primary,
+  },
+  ghostLabel: {
+    color: colors.primary,
+  },
 });
-
-Button.displayName = "Button";
